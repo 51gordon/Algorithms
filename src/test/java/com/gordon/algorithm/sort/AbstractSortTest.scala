@@ -16,14 +16,19 @@ trait AbstractSortTest {
   def compareSort(arr: Array[Int], sorter1: Sort, sorter2: Sort): Unit = {
     val _arr = new Array[Int](arr.length)
     Array.copy(arr, 0, _arr, 0, _arr.length)
-    val t0 = System.currentTimeMillis()
+    val t0 = System.nanoTime()
     sorter1.sort(arr)
-    val t1 = System.currentTimeMillis()
+    val t1 = System.nanoTime()
     sorter2.sort(_arr)
-    val t2 = System.currentTimeMillis()
+    val t2 = System.nanoTime()
 
-    println(sorter1.name + ": " + (t1 - t0) / 1000.0 + "s")
-    println(sorter2.name + ": " + (t2 - t1) / 1000.0 + "s")
+    val cost1 = (t1 - t0) / math.pow(10, 9)
+    val cost2 = (t2 - t1) / math.pow(10, 9)
+    val times = if (cost1 >= cost2) cost1 / cost2 else cost2 / cost1
+
+    println(sorter1.name + ": " + cost1.formatted("%.5f") + "s")
+    println(sorter2.name + ": " + cost2.formatted("%.5f") + "s")
+    println("耗时倍数: " + times.formatted("%.3f"))
 
   }
 
