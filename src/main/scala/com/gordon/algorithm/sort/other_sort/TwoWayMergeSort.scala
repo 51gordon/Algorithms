@@ -3,29 +3,35 @@ package com.gordon.algorithm.sort.other_sort
 import com.gordon.algorithm.sort.Sort
 
 /**
- * 归并排序
- */
-class MergeSort extends Sort {
+  * 归并排序
+  * 时间复杂度: O(nlgn)
+  * 空间复杂度: O(n)
+  */
+class TwoWayMergeSort extends Sort {
   override def name: String = "两路归并排序"
 
+  var count = 0
+
   override def sort(arr: Array[Int]): Unit = {
-    sort(arr, 0, arr.length - 1)
+    val tmpArr = new Array[Int](arr.length)
+    sort(arr, 0, arr.length - 1, tmpArr)
   }
 
-  private def sort(arr: Array[Int], low: Int, high: Int): Unit = {
+  private def sort(arr: Array[Int], low: Int, high: Int, tmpArr: Array[Int]): Unit = {
     val mid = (low + high) / 2
     if (low < high) {
-      sort(arr, low, mid)
-      sort(arr, mid + 1, high)
-      merge(arr, low, mid, high)
+      sort(arr, low, mid, tmpArr) // 左边归并排序，使得左子序列有序
+      sort(arr, mid + 1, high, tmpArr) // 右边归并排序，使得右子序列有序
+      merge(arr, low, mid, high) // 合并左右两个子序列
     }
   }
 
   private def merge(arr: Array[Int], low: Int, mid: Int, high: Int): Unit = {
+    count += 1
     val tmpArr = new Array[Int](high - low + 1)
-    var i = low
-    var j = mid + 1
-    var k = 0
+    var i = low // 左序列指针
+    var j = mid + 1 // 右序列指针
+    var k = 0 // 临时数组 tmpArr 指针
     // 左右两部分都已经各自有序，合并之
     while (i <= mid && j <= high) {
       if (arr(i) <= arr(j)) {
