@@ -12,9 +12,22 @@ class StraightInsertionSortTest extends FunSuite with AbstractSortTest {
     showArr(arr)
   }
 
-  test("compare StraightInsertionSort and SimpleSelectionSort") {
+  test("compare StraightInsertion and SimpleSelection") {
     val arr: Array[Int] = randomArray()
-    compareSort(arr, new StraightInsertionSort(), new SimpleSelectionSort())
+    compareSort(arr,
+      new StraightInsertionSort(),
+      new StraightInsertionSort2(),
+      new SimpleSelectionSort()
+    )
+  }
+
+  test("compare StraightInsertion and SimpleSelection with nearly ordered array") {
+    val arr: Array[Int] = nearlyOrderedArray(10)
+    compareSort(arr,
+      new StraightInsertionSort(),
+      new StraightInsertionSort2(),
+      new SimpleSelectionSort()
+    )
   }
 
 }

@@ -1,5 +1,7 @@
 package com.gordon.algorithm.sort
 
+import com.gordon.algorithm.sort.utils.SortUtils
+
 import scala.util.Random
 
 trait AbstractSortTest {
@@ -13,23 +15,31 @@ trait AbstractSortTest {
     Range(0, num).map(_ => random.nextInt(num)).toArray
   }
 
-  def compareSort(arr: Array[Int], sorter1: Sort, sorter2: Sort): Unit = {
-    val _arr = new Array[Int](arr.length)
-    Array.copy(arr, 0, _arr, 0, _arr.length)
-    val t0 = System.nanoTime()
-    sorter1.sort(arr)
-    val t1 = System.nanoTime()
-    sorter2.sort(_arr)
-    val t2 = System.nanoTime()
+  def nearlyOrderedArray(swapTimes: Int, num: Int = 10000): Array[Int] = {
+    val arr = Range(0, num).toArray
+    val random = new Random()
+    for (_ <- 0 until swapTimes) {
+      val x = random.nextInt(num)
+      val y = random.nextInt(num)
+      SortUtils.swap(arr, x, y)
+    }
+    arr
+  }
 
-    val cost1 = (t1 - t0) / math.pow(10, 9)
-    val cost2 = (t2 - t1) / math.pow(10, 9)
-    val times = if (cost1 >= cost2) cost1 / cost2 else cost2 / cost1
-
-    println(sorter1.name + ": " + cost1.formatted("%.5f") + "s")
-    println(sorter2.name + ": " + cost2.formatted("%.5f") + "s")
-    println("耗时倍数: " + times.formatted("%.3f"))
-
+  def compareSort(arr: Array[Int], sorters: Sort*): Unit = {
+    val result = sorters.map { sorter =>
+      val _arr = new Array[Int](arr.length)
+      Array.copy(arr, 0, _arr, 0, _arr.length)
+      val starTime = System.nanoTime()
+      sorter.sort(_arr)
+      (sorter, (System.nanoTime() - starTime) / math.pow(10, 9))
+    }
+    val maxNameLen = result.map(_._1.name.length).max
+    result.foreach {
+      case (sorter, cost) =>
+        val name = String.format("%1$-" + maxNameLen + "s", sorter.name)
+        println(name + ": " + cost.formatted("%.5f") + "s")
+    }
   }
 
 }

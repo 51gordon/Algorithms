@@ -1,6 +1,7 @@
 package com.gordon.algorithm.sort.select_sort
 
 import com.gordon.algorithm.sort.Sort
+import com.gordon.algorithm.sort.utils.SortUtils
 
 /**
   * 简单选择排序
@@ -16,7 +17,7 @@ class SimpleSelectionSort extends Sort {
           minIndex = j
         }
       }
-      swap(arr, i, minIndex)
+      SortUtils.swap(arr, i, minIndex)
     }
   }
 
