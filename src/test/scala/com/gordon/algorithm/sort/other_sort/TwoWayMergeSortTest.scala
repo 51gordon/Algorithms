@@ -13,7 +13,6 @@ class TwoWayMergeSortTest extends FunSuite with AbstractSortTest {
     showArr(arr)
     val sorter = new TwoWayMergeSort()
     sorter.sort(arr)
-    println(sorter.count)
     showArr(arr)
   }
 

@@ -10,8 +10,6 @@ import com.gordon.algorithm.sort.Sort
 class TwoWayMergeSort extends Sort {
   override def name: String = "两路归并排序"
 
-  var count = 0
-
   override def sort(arr: Array[Int]): Unit = {
     val tmpArr = new Array[Int](arr.length)
     sort(arr, 0, arr.length - 1, tmpArr)
@@ -27,7 +25,6 @@ class TwoWayMergeSort extends Sort {
   }
 
   private def merge(arr: Array[Int], low: Int, mid: Int, high: Int): Unit = {
-    count += 1
     val tmpArr = new Array[Int](high - low + 1)
     var i = low // 左序列指针
     var j = mid + 1 // 右序列指针
