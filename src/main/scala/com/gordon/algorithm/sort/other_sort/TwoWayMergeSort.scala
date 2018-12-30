@@ -15,8 +15,10 @@ class TwoWayMergeSort extends Sort {
     sort(arr, 0, arr.length - 1, tmpArr)
   }
 
+  // 递归使用归并排序，对arr[low...high]的范围进行排序
   private def sort(arr: Array[Int], low: Int, high: Int, tmpArr: Array[Int]): Unit = {
-    val mid = (low + high) / 2
+    val mid = low + (high - low) / 2
+    //    val mid = (low + high) / 2 // 不建议使用这种写法，因为可能出现整型溢出问题
     if (low < high) {
       sort(arr, low, mid, tmpArr) // 左边归并排序，使得左子序列有序
       sort(arr, mid + 1, high, tmpArr) // 右边归并排序，使得右子序列有序
