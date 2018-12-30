@@ -22,12 +22,11 @@ class TwoWayMergeSort extends Sort {
     if (low < high) {
       sort(arr, low, mid, tmpArr) // 左边归并排序，使得左子序列有序
       sort(arr, mid + 1, high, tmpArr) // 右边归并排序，使得右子序列有序
-      merge(arr, low, mid, high) // 合并左右两个子序列
+      merge(arr, low, mid, high, tmpArr) // 合并左右两个子序列
     }
   }
 
-  private def merge(arr: Array[Int], low: Int, mid: Int, high: Int): Unit = {
-    val tmpArr = new Array[Int](high - low + 1)
+  private def merge(arr: Array[Int], low: Int, mid: Int, high: Int, tmpArr: Array[Int]): Unit = {
     var i = low // 左序列指针
     var j = mid + 1 // 右序列指针
     var k = 0 // 临时数组 tmpArr 指针
@@ -57,9 +56,9 @@ class TwoWayMergeSort extends Sort {
       k += 1
     }
 
-    // 把新数组中的数覆盖原数组
-    for (x <- tmpArr.indices) {
-      arr(x + low) = tmpArr(x)
+    // 把新数组中的数覆盖原数组中[low...high]部分
+    for (x <- low to high) {
+      arr(x) = tmpArr(x - low)
     }
   }
 }
