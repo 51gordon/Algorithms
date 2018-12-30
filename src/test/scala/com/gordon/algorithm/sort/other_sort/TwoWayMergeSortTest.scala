@@ -17,10 +17,18 @@ class TwoWayMergeSortTest extends FunSuite with AbstractSortTest {
     showArr(arr)
   }
 
-  test("compare InsertionSort and TwoWayMergeSort") {
-    val arr: Array[Int] = generateRandomArray(50000)
+  test("compare StraightInsertionSort and TwoWayMergeSort") {
+    val arr: Array[Int] = generateRandomArray(100000)
     compareSort(arr,
       new StraightInsertionSort(),
+      new TwoWayMergeSort()
+    )
+  }
+
+  test("compare StraightInsertionSort2 and TwoWayMergeSort") {
+    val arr: Array[Int] = generateRandomNearlyOrderedArray(100, num = 100000)
+    compareSort(arr,
+      new StraightInsertionSort2(),
       new TwoWayMergeSort()
     )
   }

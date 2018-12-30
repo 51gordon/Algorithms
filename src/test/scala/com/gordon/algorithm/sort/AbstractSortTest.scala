@@ -12,18 +12,19 @@ trait AbstractSortTest {
 
   /**
     * 随机产生一个数组
+    *
     * @param num 数组大小
     * @return
     */
   def generateRandomArray(num: Int = 10000): Array[Int] = {
-    val random = new Random()
-    Range(0, num).map(_ => random.nextInt(num)).toArray
+    generateRandomNearlyOrderedArray(num / 2, num)
   }
 
   /**
     * 随机产生一个近乎有序的有序数组
+    *
     * @param swapTimes 随机交换次数
-    * @param num 数组大小
+    * @param num       数组大小
     * @return
     */
   def generateRandomNearlyOrderedArray(swapTimes: Int, num: Int = 10000): Array[Int] = {
@@ -38,11 +39,14 @@ trait AbstractSortTest {
   }
 
   def compareSort(arr: Array[Int], sorters: Sort*): Unit = {
+//    println(s"arr: ${arr.mkString(",")}")
     val result = sorters.map { sorter =>
       val _arr = new Array[Int](arr.length)
       Array.copy(arr, 0, _arr, 0, _arr.length)
+//      println(s"_arr before sort: ${_arr.mkString(",")}")
       val starTime = System.nanoTime()
       sorter.sort(_arr)
+//      println(s"_arr after  sort: ${_arr.mkString(",")}")
       (sorter, (System.nanoTime() - starTime) / math.pow(10, 9))
     }
     val maxNameLen = result.map(_._1.name.length).max
