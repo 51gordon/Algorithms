@@ -6,16 +6,27 @@ import scala.util.Random
 
 trait AbstractSortTest {
 
-  val arr: Array[Int] = Array(8, 6, 2, 3, 1, 5, 7, 4)
+  val arr: Array[Int] = Array(8, 6, 2, 3, 1, 5, 4, 7)
 
   def showArr(arr: Array[Int]): Unit = println(arr.mkString(","))
 
-  def randomArray(num: Int = 10000): Array[Int] = {
+  /**
+    * 随机产生一个数组
+    * @param num 数组大小
+    * @return
+    */
+  def generateRandomArray(num: Int = 10000): Array[Int] = {
     val random = new Random()
     Range(0, num).map(_ => random.nextInt(num)).toArray
   }
 
-  def nearlyOrderedArray(swapTimes: Int, num: Int = 10000): Array[Int] = {
+  /**
+    * 随机产生一个近乎有序的有序数组
+    * @param swapTimes 随机交换次数
+    * @param num 数组大小
+    * @return
+    */
+  def generateRandomNearlyOrderedArray(swapTimes: Int, num: Int = 10000): Array[Int] = {
     val arr = Range(0, num).toArray
     val random = new Random()
     for (_ <- 0 until swapTimes) {
