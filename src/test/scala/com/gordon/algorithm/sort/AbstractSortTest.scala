@@ -20,6 +20,11 @@ trait AbstractSortTest {
     generateRandomNearlyOrderedArray(num / 2, num)
   }
 
+  def generateRandomArrayInRange(num: Int = 10000, min: Int, max: Int): Array[Int] = {
+    val random = new Random()
+    Range(0, num).map(_ => min + random.nextInt(max - min)).toArray
+  }
+
   /**
     * 随机产生一个近乎有序的有序数组
     *
