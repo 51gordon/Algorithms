@@ -10,8 +10,8 @@ object SortUtils {
   }
 
   def isSorted(arr: Array[Int]): Boolean = {
-    arr.indices.exists { index =>
-      !(index < arr.length - 1 && arr(index) > arr(index + 1))
+    !Range(0, arr.length - 1).exists { index =>
+      arr(index) > arr(index + 1)
     }
   }
 }
