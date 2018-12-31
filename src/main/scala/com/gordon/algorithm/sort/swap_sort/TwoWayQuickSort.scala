@@ -27,8 +27,8 @@ class TwoWayQuickSort extends Sort {
   }
 
   private def partition(arr: Array[Int], low: Int, high: Int, random: Random): Int = {
-    val v = arr(low + random.nextInt(high - low))
-//    val v = arr(low) // 对于近乎有序的数组，这种方式取标定元素会导致分割后树退化为链表
+    val v = arr(low + random.nextInt(high + 1 - low))
+    //    val v = arr(low) // 对于近乎有序的数组，这种方式取标定元素会导致分割后树退化为链表
     var j = low // j 是元素arr(low) 最应该所处的位置
     // arr[low+1,...j] < v; arr[j+1...high] > v
     for (i <- low + 1 to high) {
