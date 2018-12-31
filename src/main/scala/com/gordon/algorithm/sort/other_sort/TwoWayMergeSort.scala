@@ -22,7 +22,10 @@ class TwoWayMergeSort extends Sort {
     if (low < high) {
       sort(arr, low, mid, tmpArr) // 左边归并排序，使得左子序列有序
       sort(arr, mid + 1, high, tmpArr) // 右边归并排序，使得右子序列有序
-      merge(arr, low, mid, high, tmpArr) // 合并左右两个子序列
+      // 如果左右两边整体已经完全有序，那么不需要归并了
+      if (arr(mid) > arr(mid + 1)) {
+        merge(arr, low, mid, high, tmpArr) // 合并左右两个子序列
+      }
     }
   }
 
