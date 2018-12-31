@@ -6,9 +6,7 @@ import org.scalatest.FunSuite
 class BubbleSortTest extends FunSuite with AbstractSortTest {
 
   test("testSort") {
-    showArr(arr)
-    new BubbleSort().sort(arr)
-    showArr(arr)
+    simpleSortTest(new BubbleSort())
   }
 
 }

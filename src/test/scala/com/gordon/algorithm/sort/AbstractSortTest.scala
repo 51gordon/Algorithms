@@ -8,8 +8,6 @@ trait AbstractSortTest {
 
   val arr: Array[Int] = Array(8, 6, 2, 3, 1, 5, 4, 7)
 
-  def showArr(arr: Array[Int]): Unit = println(arr.mkString(","))
-
   /**
     * 随机产生一个数组
     *
@@ -43,11 +41,16 @@ trait AbstractSortTest {
     arr
   }
 
+  def copyArr(arr: Array[Int]): Array[Int] = {
+    val _arr = new Array[Int](arr.length)
+    Array.copy(arr, 0, _arr, 0, _arr.length)
+    _arr
+  }
+
   def compareSort(arr: Array[Int], sorters: Sort*): Unit = {
     //    println(s"arr: ${arr.mkString(",")}")
     val result = sorters.map { sorter =>
-      val _arr = new Array[Int](arr.length)
-      Array.copy(arr, 0, _arr, 0, _arr.length)
+      val _arr = copyArr(arr)
       //      println(s"_arr before sort: ${_arr.mkString(",")}")
       val starTime = System.nanoTime()
       sorter.sort(_arr)
@@ -60,6 +63,14 @@ trait AbstractSortTest {
         val name = String.format("%1$-" + maxNameLen + "s", sorter.name)
         println(name + ": " + cost.formatted("%.5f") + "s")
     }
+  }
+
+  def simpleSortTest(sorter: Sort, arr: Array[Int] = arr): Unit = {
+    val _arr = copyArr(arr)
+    println("Before sort: " + _arr.mkString(","))
+    sorter.sort(_arr)
+    println("After  sort: " + _arr.mkString(","))
+    assert(SortUtils.isSorted(_arr))
   }
 
 }

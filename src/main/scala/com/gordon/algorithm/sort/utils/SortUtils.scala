@@ -8,4 +8,10 @@ object SortUtils {
       arr(y) = tmp
     }
   }
+
+  def isSorted(arr: Array[Int]): Boolean = {
+    arr.indices.exists { index =>
+      !(index < arr.length - 1 && arr(index) > arr(index + 1))
+    }
+  }
 }

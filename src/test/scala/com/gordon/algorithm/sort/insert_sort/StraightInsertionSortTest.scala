@@ -7,9 +7,7 @@ import org.scalatest.FunSuite
 class StraightInsertionSortTest extends FunSuite with AbstractSortTest {
 
   test("testSort") {
-    showArr(arr)
-    new StraightInsertionSort().sort(arr)
-    showArr(arr)
+    simpleSortTest(new StraightInsertionSort())
   }
 
   test("compare StraightInsertion and SimpleSelection") {

@@ -6,9 +6,7 @@ import org.scalatest.FunSuite
 class SimpleSelectionSortTest extends FunSuite with AbstractSortTest {
 
   test("testSort") {
-    showArr(arr)
-    new SimpleSelectionSort().sort(arr)
-    showArr(arr)
+    simpleSortTest(new SimpleSelectionSort())
   }
 
 }

@@ -11,10 +11,7 @@ import org.scalatest.FunSuite
 class TwoWayMergeSortTest extends FunSuite with AbstractSortTest {
 
   test("testSort") {
-    showArr(arr)
-    val sorter = new TwoWayMergeSort()
-    sorter.sort(arr)
-    showArr(arr)
+    simpleSortTest(new TwoWayMergeSort())
   }
 
   test("compare StraightInsertionSort and TwoWayMergeSort") {

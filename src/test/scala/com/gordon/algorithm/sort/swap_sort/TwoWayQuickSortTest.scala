@@ -8,10 +8,7 @@ class TwoWayQuickSortTest extends FunSuite with AbstractSortTest {
 
   test("testSort") {
     val arr = Array(4, 7, 3, 2, 8, 6, 5, 1)
-    showArr(arr)
-    val sorter = new TwoWayQuickSort()
-    sorter.sort(arr)
-    showArr(arr)
+    simpleSortTest(new TwoWayQuickSort(), arr)
   }
 
   test("compare TwoWayMergeSort and TwoWayQuickSort") {
@@ -32,11 +29,12 @@ class TwoWayQuickSortTest extends FunSuite with AbstractSortTest {
   }
 
   test("compare TwoWayMergeSort and TwoWayQuickSort with many repeated element array") {
-    val arr: Array[Int] = generateRandomArrayInRange(1000000, 0, 10)
+    val arr: Array[Int] = generateRandomArrayInRange(500000, 0, 10)
     compareSort(arr,
       new TwoWayMergeSort(),
       // 待排序元素包含大量重复元素时，partition操作后，两个子序列会非常不平衡，导致退化为O(n^2)
-      new TwoWayQuickSort()
+      new TwoWayQuickSort(),
+      new TwoWayQuickSort2()
     )
   }
 }
