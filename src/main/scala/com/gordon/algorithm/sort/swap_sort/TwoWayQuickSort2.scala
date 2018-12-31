@@ -36,6 +36,7 @@ class TwoWayQuickSort2 extends Sort {
 
     breakable {
       while (true) {
+        // TODO 每看懂
         while (i <= high && arr(i) < v) {
           i += 1
         }
