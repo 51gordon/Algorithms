@@ -13,10 +13,10 @@ class TwoWayMergeSort3Test extends FunSuite with AbstractSortTest {
     showArr(arr)
   }
 
-  test("compare TwoWayMergeSort2 and TwoWayMergeSort3") {
+  test("compare TwoWayMergeSort and TwoWayMergeSort3") {
     val arr: Array[Int] = generateRandomArray()
     compareSort(arr,
-      new TwoWayMergeSort2(),
+      new TwoWayMergeSort(),
       new TwoWayMergeSort3()
     )
   }
