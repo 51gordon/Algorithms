@@ -22,4 +22,12 @@ class TwoWayQuickSortTest extends FunSuite with AbstractSortTest {
     )
   }
 
+  test("compare TwoWayMergeSort and TwoWayQuickSort with nearly ordered array") {
+    val arr: Array[Int] = generateRandomNearlyOrderedArray(500000)
+    compareSort(arr,
+      new TwoWayMergeSort(),
+      new TwoWayQuickSort()
+    )
+  }
+
 }
